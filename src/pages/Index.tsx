@@ -1,12 +1,67 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useState } from "react";
+import FloatingHearts from "@/components/FloatingHearts";
+import BirthdayMusic from "@/components/BirthdayMusic";
+import BirthdayImages from "@/components/BirthdayImages";
+import { Sparkles } from "lucide-react";
 
 const Index = () => {
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShowContent(true), 100);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden">
+      <FloatingHearts />
+      <BirthdayMusic />
+      
+      <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-12">
+        <div
+          className={`text-center space-y-8 transition-all duration-1000 ${
+            showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="space-y-4 animate-bounce-in">
+            <div className="flex justify-center">
+              <Sparkles className="w-16 h-16 text-primary animate-pulse-glow" />
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-celebration-pink via-celebration-purple to-celebration-gold bg-clip-text text-transparent">
+              Happy Birthday!
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+              Wishing you a day filled with love and joy! 🎉
+            </p>
+          </div>
+
+          <div
+            className={`transition-all duration-1000 delay-300 ${
+              showContent ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            }`}
+          >
+            <BirthdayImages />
+          </div>
+
+          <div
+            className={`transition-all duration-1000 delay-500 ${
+              showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+              May this special day bring you endless happiness, wonderful surprises,
+              and cherished memories that last a lifetime! 🎂🎈
+            </p>
+          </div>
+
+          <div
+            className={`flex gap-4 justify-center text-4xl transition-all duration-1000 delay-700 ${
+              showContent ? "opacity-100 scale-100" : "opacity-0 scale-50"
+            }`}
+          >
+            🎊 🎁 🎉 🎂 🎈
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
