@@ -4,6 +4,7 @@ import BirthdayMusic from "@/components/BirthdayMusic";
 import BirthdayImages from "@/components/BirthdayImages";
 import CelebrationBubbles from "@/components/CelebrationBubbles";
 import ConfettiExplosion from "@/components/ConfettiExplosion";
+import Fireworks from "@/components/Fireworks";
 import { Sparkles } from "lucide-react";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden">
+      <Fireworks />
       <FloatingHearts />
       <CelebrationBubbles />
       <ConfettiExplosion />
