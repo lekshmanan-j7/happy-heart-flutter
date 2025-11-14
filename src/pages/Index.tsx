@@ -3,6 +3,7 @@ import FloatingHearts from "@/components/FloatingHearts";
 import BirthdayMusic from "@/components/BirthdayMusic";
 import BirthdayImages from "@/components/BirthdayImages";
 import CelebrationBubbles from "@/components/CelebrationBubbles";
+import ConfettiExplosion from "@/components/ConfettiExplosion";
 import { Sparkles } from "lucide-react";
 
 const Index = () => {
@@ -16,8 +17,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden">
       <FloatingHearts />
       <CelebrationBubbles />
+      <ConfettiExplosion />
       <BirthdayMusic />
-      
+
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 py-8 sm:py-12">
         <div
           className={`text-center space-y-6 sm:space-y-8 w-full max-w-4xl transition-all duration-1000 ${
