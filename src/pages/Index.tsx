@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { formatInTimeZone } from "date-fns-tz";
+import { isAfter } from "date-fns";
 import FloatingHearts from "@/components/FloatingHearts";
 import BirthdayMusic from "@/components/BirthdayMusic";
 import BirthdayImages from "@/components/BirthdayImages";
@@ -6,14 +8,44 @@ import CelebrationBubbles from "@/components/CelebrationBubbles";
 import ConfettiExplosion from "@/components/ConfettiExplosion";
 import Fireworks from "@/components/Fireworks";
 import CursorSparkles from "@/components/CursorSparkles";
+import CountdownTimer from "@/components/CountdownTimer";
 import { Sparkles } from "lucide-react";
+
+const IRELAND_TIMEZONE = "Europe/Dublin";
+const TARGET_DATE = new Date("2026-02-19T00:01:00");
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
+  const [isBirthdayTime, setIsBirthdayTime] = useState(false);
 
   useEffect(() => {
+    const checkBirthdayTime = () => {
+      // Get current time in Ireland timezone
+      const nowInIreland = new Date(
+        formatInTimeZone(new Date(), IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
+      );
+      
+      const targetInIreland = new Date(
+        formatInTimeZone(TARGET_DATE, IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
+      );
+
+      // Check if current time is on or after Feb 19, 2026 12:01 AM Ireland time
+      setIsBirthdayTime(isAfter(nowInIreland, targetInIreland) || nowInIreland.getTime() === targetInIreland.getTime());
+    };
+
+    checkBirthdayTime();
+    const interval = setInterval(checkBirthdayTime, 1000);
+
     setTimeout(() => setShowContent(true), 100);
+
+    return () => clearInterval(interval);
   }, []);
+
+
+  // Show countdown if it's not birthday time yet
+  if (!isBirthdayTime) {
+    return <CountdownTimer />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden">
