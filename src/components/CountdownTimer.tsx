@@ -95,7 +95,11 @@ const CountdownTimer = () => {
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-center gap-2 text-lg sm:text-xl text-foreground/80">
+          <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
+            Advanced Happy Birthday Wishes
+          </p>
+          
+          <div className="flex items-center justify-center gap-2 text-lg sm:text-xl text-celebration-gold font-semibold">
             <Sparkles className="w-5 h-5 text-celebration-gold" />
             <span>February 19, 2026</span>
             <Sparkles className="w-5 h-5 text-celebration-gold" />
