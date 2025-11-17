@@ -119,6 +119,19 @@ export default {
             opacity: "1",
           },
         },
+        "sparkle-fade": {
+          "0%": {
+            transform: "translate(-50%, -50%) scale(0) rotate(0deg)",
+            opacity: "0",
+          },
+          "50%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translate(-50%, -50%) scale(1.5) rotate(180deg)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +139,7 @@ export default {
         "float-up": "float-up linear infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "bounce-in": "bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "sparkle-fade": "sparkle-fade 1s ease-out forwards",
       },
     },
   },
