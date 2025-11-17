@@ -5,6 +5,7 @@ import BirthdayImages from "@/components/BirthdayImages";
 import CelebrationBubbles from "@/components/CelebrationBubbles";
 import ConfettiExplosion from "@/components/ConfettiExplosion";
 import Fireworks from "@/components/Fireworks";
+import CursorSparkles from "@/components/CursorSparkles";
 import { Sparkles } from "lucide-react";
 
 const Index = () => {
@@ -20,6 +21,7 @@ const Index = () => {
       <FloatingHearts />
       <CelebrationBubbles />
       <ConfettiExplosion />
+      <CursorSparkles />
       <BirthdayMusic />
 
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 py-8 sm:py-12">
