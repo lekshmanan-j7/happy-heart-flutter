@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatInTimeZone } from "date-fns-tz";
+import { toZonedTime } from "date-fns-tz";
 import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from "date-fns";
 import { Sparkles, Calendar } from "lucide-react";
 
@@ -17,13 +17,8 @@ const CountdownTimer = () => {
   useEffect(() => {
     const updateCountdown = () => {
       // Get current time in Ireland timezone
-      const nowInIreland = new Date(
-        formatInTimeZone(new Date(), IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
-      );
-      
-      const targetInIreland = new Date(
-        formatInTimeZone(TARGET_DATE, IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
-      );
+      const nowInIreland = toZonedTime(new Date(), IRELAND_TIMEZONE);
+      const targetInIreland = toZonedTime(TARGET_DATE, IRELAND_TIMEZONE);
 
       const days = differenceInDays(targetInIreland, nowInIreland);
       const hours = differenceInHours(targetInIreland, nowInIreland) % 24;
@@ -50,10 +45,6 @@ const CountdownTimer = () => {
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-celebration-pink via-celebration-purple to-celebration-gold bg-clip-text text-transparent">
             Birthday Countdown
           </h1>
-          
-          <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
-            Something special is coming...
-          </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
@@ -104,10 +95,6 @@ const CountdownTimer = () => {
             <span>February 19, 2026</span>
             <Sparkles className="w-5 h-5 text-celebration-gold" />
           </div>
-          
-          <p className="text-sm text-muted-foreground">
-            Ireland Time (Europe/Dublin)
-          </p>
         </div>
 
         <div className="flex flex-wrap gap-3 justify-center text-3xl sm:text-4xl">

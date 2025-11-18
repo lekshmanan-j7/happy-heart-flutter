@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { formatInTimeZone } from "date-fns-tz";
-import { isAfter } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
+import { isAfter, isEqual } from "date-fns";
 import FloatingHearts from "@/components/FloatingHearts";
 import BirthdayMusic from "@/components/BirthdayMusic";
 import BirthdayImages from "@/components/BirthdayImages";
@@ -21,16 +21,11 @@ const Index = () => {
   useEffect(() => {
     const checkBirthdayTime = () => {
       // Get current time in Ireland timezone
-      const nowInIreland = new Date(
-        formatInTimeZone(new Date(), IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
-      );
-      
-      const targetInIreland = new Date(
-        formatInTimeZone(TARGET_DATE, IRELAND_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ss")
-      );
+      const nowInIreland = toZonedTime(new Date(), IRELAND_TIMEZONE);
+      const targetInIreland = toZonedTime(TARGET_DATE, IRELAND_TIMEZONE);
 
       // Check if current time is on or after Feb 19, 2026 12:01 AM Ireland time
-      setIsBirthdayTime(isAfter(nowInIreland, targetInIreland) || nowInIreland.getTime() === targetInIreland.getTime());
+      setIsBirthdayTime(isAfter(nowInIreland, targetInIreland) || isEqual(nowInIreland, targetInIreland));
     };
 
     checkBirthdayTime();
