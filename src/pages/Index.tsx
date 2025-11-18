@@ -17,6 +17,7 @@ const TARGET_DATE = new Date("2026-02-19T00:01:00");
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
   const [isBirthdayTime, setIsBirthdayTime] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const checkBirthdayTime = () => {
@@ -25,7 +26,16 @@ const Index = () => {
       const targetInIreland = toZonedTime(TARGET_DATE, IRELAND_TIMEZONE);
 
       // Check if current time is on or after Feb 19, 2026 12:01 AM Ireland time
-      setIsBirthdayTime(isAfter(nowInIreland, targetInIreland) || isEqual(nowInIreland, targetInIreland));
+      const shouldShowBirthday = isAfter(nowInIreland, targetInIreland) || isEqual(nowInIreland, targetInIreland);
+      
+      if (shouldShowBirthday && !isBirthdayTime) {
+        // Trigger transition
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setIsBirthdayTime(true);
+          setIsTransitioning(false);
+        }, 500); // Duration of fade-out animation
+      }
     };
 
     checkBirthdayTime();
@@ -39,11 +49,16 @@ const Index = () => {
 
   // Show countdown if it's not birthday time yet
   if (!isBirthdayTime) {
-    return <CountdownTimer />;
+    return (
+      <div className={`transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <CountdownTimer />
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background overflow-hidden animate-fade-in">
+
       <Fireworks />
       <FloatingHearts />
       <CelebrationBubbles />
