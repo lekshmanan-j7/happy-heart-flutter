@@ -37,11 +37,6 @@ const CountdownTimer = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background flex items-center justify-center px-4">
       <div className="text-center space-y-8 max-w-4xl w-full">
-        <div className="space-y-4 animate-bounce-in">
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-celebration-gold via-celebration-pink to-celebration-purple bg-clip-text text-transparent">
-            Birthday Countdown
-          </h1>
-        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-primary/20 shadow-lg hover:scale-105 transition-transform">
