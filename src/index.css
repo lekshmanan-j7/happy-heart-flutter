@@ -43,6 +43,7 @@ All colors MUST be HSL.
     --celebration-rose: 350 100% 88%;
     --celebration-gold: 45 100% 51%;
     --celebration-purple: 280 65% 60%;
+    --celebration-dark-red: 0 70% 35%;
     
     /* Gradients */
     --gradient-celebration: linear-gradient(135deg, hsl(340 82% 52%), hsl(280 65% 60%));
@@ -102,6 +103,7 @@ All colors MUST be HSL.
     --celebration-rose: 350 60% 40%;
     --celebration-gold: 45 100% 51%;
     --celebration-purple: 280 65% 60%;
+    --celebration-dark-red: 0 80% 45%;
     
     --gradient-celebration: linear-gradient(135deg, hsl(340 82% 52%), hsl(280 65% 60%));
     --gradient-soft: linear-gradient(180deg, hsl(340 50% 8%), hsl(340 45% 12%));

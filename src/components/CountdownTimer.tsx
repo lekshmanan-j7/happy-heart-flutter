@@ -45,28 +45,28 @@ const CountdownTimer = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-primary/20 shadow-lg hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-celebration-pink to-celebration-purple bg-clip-text text-transparent">{timeRemaining.days}</div>
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-celebration-dark-red">{timeRemaining.days}</div>
             <div className="text-xs sm:text-sm md:text-base text-muted-foreground mt-2 font-medium">
               Days
             </div>
           </div>
 
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-accent/20 shadow-lg hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-celebration-purple to-celebration-gold bg-clip-text text-transparent">{timeRemaining.hours}</div>
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-celebration-dark-red">{timeRemaining.hours}</div>
             <div className="text-xs sm:text-sm md:text-base text-muted-foreground mt-2 font-medium">
               Hours
             </div>
           </div>
 
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-secondary/20 shadow-lg hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-celebration-gold to-celebration-pink bg-clip-text text-transparent">{timeRemaining.minutes}</div>
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-celebration-dark-red">{timeRemaining.minutes}</div>
             <div className="text-xs sm:text-sm md:text-base text-muted-foreground mt-2 font-medium">
               Minutes
             </div>
           </div>
 
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-primary/20 shadow-lg hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-celebration-pink to-celebration-purple bg-clip-text text-transparent">{timeRemaining.seconds}</div>
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-celebration-dark-red">{timeRemaining.seconds}</div>
             <div className="text-xs sm:text-sm md:text-base text-muted-foreground mt-2 font-medium">
               Seconds
             </div>
