@@ -69,9 +69,13 @@ const CountdownTimer = () => {
         </div>
 
         <div className="space-y-4">
-          <p className="text-2xl sm:text-3xl text-celebration-gold font-bold">
-            Hi Ajitha,
-          </p>
+          <div className="flex items-center justify-center gap-2">
+            <Sparkles className="w-5 h-5 text-celebration-gold animate-pulse" />
+            <p className="text-2xl sm:text-3xl text-celebration-gold font-bold">
+              Hi Ajitha,
+            </p>
+            <Sparkles className="w-5 h-5 text-celebration-gold animate-pulse" style={{ animationDelay: '0.5s' }} />
+          </div>
           <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
             Advanced Happy Birthday Wishes
           </p>
