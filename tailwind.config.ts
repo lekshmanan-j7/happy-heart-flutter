@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        'celebration-pink': 'hsl(var(--celebration-pink))',
+        'celebration-rose': 'hsl(var(--celebration-rose))',
+        'celebration-gold': 'hsl(var(--celebration-gold))',
+        'celebration-purple': 'hsl(var(--celebration-purple))',
+        'celebration-dark-red': 'hsl(var(--celebration-dark-red))',
       },
       borderRadius: {
         lg: "var(--radius)",
