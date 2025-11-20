@@ -69,6 +69,9 @@ const CountdownTimer = () => {
         </div>
 
         <div className="space-y-4">
+          <p className="text-2xl sm:text-3xl text-celebration-gold font-bold">
+            Hi Ajitha,
+          </p>
           <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
             Advanced Happy Birthday Wishes
           </p>
