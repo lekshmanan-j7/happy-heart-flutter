@@ -4,7 +4,7 @@ import { differenceInDays, differenceInHours, differenceInMinutes, differenceInS
 import { Sparkles } from "lucide-react";
 
 const IRELAND_TIMEZONE = "Europe/Dublin";
-const TARGET_DATE = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+const TARGET_DATE = new Date(Date.now() + 1 * 60 * 1000); // 1 minute from now
 
 const CountdownTimer = () => {
   const [timeRemaining, setTimeRemaining] = useState({
@@ -20,10 +20,10 @@ const CountdownTimer = () => {
       const nowInIreland = toZonedTime(new Date(), IRELAND_TIMEZONE);
       const targetInIreland = toZonedTime(TARGET_DATE, IRELAND_TIMEZONE);
 
-      const days = differenceInDays(targetInIreland, nowInIreland);
-      const hours = differenceInHours(targetInIreland, nowInIreland) % 24;
-      const minutes = differenceInMinutes(targetInIreland, nowInIreland) % 60;
-      const seconds = differenceInSeconds(targetInIreland, nowInIreland) % 60;
+      const days = Math.max(0, differenceInDays(targetInIreland, nowInIreland));
+      const hours = Math.max(0, differenceInHours(targetInIreland, nowInIreland) % 24);
+      const minutes = Math.max(0, differenceInMinutes(targetInIreland, nowInIreland) % 60);
+      const seconds = Math.max(0, differenceInSeconds(targetInIreland, nowInIreland) % 60);
 
       setTimeRemaining({ days, hours, minutes, seconds });
     };

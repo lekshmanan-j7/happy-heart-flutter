@@ -14,13 +14,13 @@ const StarsAndMoons = () => {
       delay: Math.random() * 3,
     }));
 
-    // Generate random moons
-    const generatedMoons = Array.from({ length: 5 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: Math.random() * 4,
-    }));
+    // Generate one bright moon
+    const generatedMoons = [{
+      id: 0,
+      left: "85%",
+      top: "10%",
+      delay: 0,
+    }];
 
     setStars(generatedStars);
     setMoons(generatedMoons);
@@ -48,15 +48,16 @@ const StarsAndMoons = () => {
       {moons.map((moon) => (
         <div
           key={`moon-${moon.id}`}
-          className="absolute text-3xl"
+          className="absolute text-6xl"
           style={{
             left: moon.left,
             top: moon.top,
-            animation: "moon-glow 3s ease-in-out infinite",
+            animation: "moon-glow 2s ease-in-out infinite",
             animationDelay: `${moon.delay}s`,
+            filter: "brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))",
           }}
         >
-          🌙
+          🌕
         </div>
       ))}
     </div>
