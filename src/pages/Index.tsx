@@ -78,8 +78,8 @@ const Index = () => {
             <div className="flex justify-center">
               <Sparkles className="w-12 h-12 sm:w-16 sm:h-16 text-primary animate-pulse-glow" />
             </div>
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-celebration-pink via-celebration-purple to-celebration-gold bg-clip-text text-transparent px-4">
-              Happy Birthday!
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-celebration-pink via-celebration-purple to-celebration-gold bg-clip-text text-transparent px-4">
+              Happy Birthday Aji chellam!
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium px-4">
               Wishing you a day filled with love and joy! 🎉
@@ -99,7 +99,7 @@ const Index = () => {
               showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <p className="text-base sm:text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed px-4">
+            <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto leading-relaxed px-4">
               May this special day bring you endless happiness, wonderful surprises,
               and cherished memories that last a lifetime! 🎂🎈
             </p>
