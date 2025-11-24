@@ -32,14 +32,14 @@ const StarsAndMoons = () => {
       {stars.map((star) => (
         <div
           key={`star-${star.id}`}
-          className="absolute rounded-full bg-white animate-pulse"
+          className="absolute rounded-full bg-white"
           style={{
             left: star.left,
             top: star.top,
             width: `${star.size}px`,
             height: `${star.size}px`,
+            animation: `twinkle ${2 + Math.random() * 2}s ease-in-out infinite`,
             animationDelay: `${star.delay}s`,
-            animationDuration: `${2 + Math.random() * 2}s`,
           }}
         />
       ))}
@@ -48,12 +48,12 @@ const StarsAndMoons = () => {
       {moons.map((moon) => (
         <div
           key={`moon-${moon.id}`}
-          className="absolute text-2xl opacity-60 animate-pulse"
+          className="absolute text-3xl"
           style={{
             left: moon.left,
             top: moon.top,
+            animation: "moon-glow 3s ease-in-out infinite",
             animationDelay: `${moon.delay}s`,
-            animationDuration: "4s",
           }}
         >
           🌙
