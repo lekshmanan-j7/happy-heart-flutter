@@ -4,7 +4,7 @@ import { differenceInDays, differenceInHours, differenceInMinutes, differenceInS
 import { Sparkles } from "lucide-react";
 
 const IRELAND_TIMEZONE = "Europe/Dublin";
-const TARGET_DATE = new Date("2026-02-19T00:01:00");
+const TARGET_DATE = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
 
 const CountdownTimer = () => {
   const [timeRemaining, setTimeRemaining] = useState({
