@@ -194,6 +194,30 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+  }
+}
+
+@keyframes moon-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 223, 0, 0.8)) drop-shadow(0 0 30px rgba(255, 223, 0, 0.6));
+    transform: scale(1.1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
