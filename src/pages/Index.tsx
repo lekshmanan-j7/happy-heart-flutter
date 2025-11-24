@@ -13,7 +13,7 @@ import StarsAndMoons from "@/components/StarsAndMoons";
 import { Sparkles } from "lucide-react";
 
 const IRELAND_TIMEZONE = "Europe/Dublin";
-const TARGET_DATE = new Date("2026-02-19T00:01:00");
+const TARGET_DATE = new Date(Date.now() + 1 * 60 * 1000); // 1 minute from now
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
