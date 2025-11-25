@@ -229,6 +229,15 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes float-cloud {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

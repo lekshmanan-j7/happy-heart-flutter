@@ -6,6 +6,7 @@ const IRELAND_TIMEZONE = "Europe/Dublin";
 const DayNightBackground = () => {
   const [isNight, setIsNight] = useState(true);
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: number; delay: number }>>([]);
+  const [clouds, setClouds] = useState<Array<{ id: number; top: string; size: number; duration: number; delay: number }>>([]);
 
   useEffect(() => {
     // Check if it's night time in Ireland (6 PM - 6 AM)
@@ -31,6 +32,17 @@ const DayNightBackground = () => {
     }));
 
     setStars(generatedStars);
+
+    // Generate clouds for day mode
+    const generatedClouds = Array.from({ length: 6 }, (_, i) => ({
+      id: i,
+      top: `${Math.random() * 60 + 10}%`,
+      size: Math.random() * 40 + 60,
+      duration: Math.random() * 30 + 40,
+      delay: Math.random() * 10,
+    }));
+
+    setClouds(generatedClouds);
 
     return () => clearInterval(interval);
   }, []);
@@ -136,43 +148,121 @@ const DayNightBackground = () => {
         </>
       )}
 
-      {/* Day mode - Sun */}
+      {/* Day mode - Sun and Clouds */}
       {!isNight && (
-        <div
-          className="absolute"
-          style={{
-            right: "15%",
-            top: "10%",
-            width: "140px",
-            height: "140px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle at 40% 40%, #fff9e6 0%, #ffeb3b 40%, #ffc107 70%, #ff9800 100%)",
-            boxShadow: `
-              0 0 60px rgba(255, 235, 59, 0.8),
-              0 0 100px rgba(255, 235, 59, 0.5),
-              0 0 140px rgba(255, 193, 7, 0.3)
-            `,
-            animation: "sun-pulse 4s ease-in-out infinite",
-          }}
-        >
-          {/* Sun rays */}
-          {[...Array(12)].map((_, i) => (
+        <>
+          {/* Sun */}
+          <div
+            className="absolute"
+            style={{
+              right: "15%",
+              top: "10%",
+              width: "140px",
+              height: "140px",
+              borderRadius: "50%",
+              background: "radial-gradient(circle at 40% 40%, #fff9e6 0%, #ffeb3b 40%, #ffc107 70%, #ff9800 100%)",
+              boxShadow: `
+                0 0 60px rgba(255, 235, 59, 0.8),
+                0 0 100px rgba(255, 235, 59, 0.5),
+                0 0 140px rgba(255, 193, 7, 0.3)
+              `,
+              animation: "sun-pulse 4s ease-in-out infinite",
+            }}
+          >
+            {/* Sun rays */}
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={`ray-${i}`}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: "80px",
+                  height: "3px",
+                  background: "linear-gradient(to right, rgba(255, 235, 59, 0.8), transparent)",
+                  transformOrigin: "left center",
+                  transform: `rotate(${i * 30}deg) translateY(-50%)`,
+                  opacity: 0.6,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Floating Clouds */}
+          {clouds.map((cloud) => (
             <div
-              key={`ray-${i}`}
+              key={`cloud-${cloud.id}`}
+              className="absolute"
               style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                width: "80px",
-                height: "3px",
-                background: "linear-gradient(to right, rgba(255, 235, 59, 0.8), transparent)",
-                transformOrigin: "left center",
-                transform: `rotate(${i * 30}deg) translateY(-50%)`,
-                opacity: 0.6,
+                top: cloud.top,
+                left: "-20%",
+                width: `${cloud.size}px`,
+                height: `${cloud.size * 0.6}px`,
+                animation: `float-cloud ${cloud.duration}s linear infinite`,
+                animationDelay: `${cloud.delay}s`,
+                opacity: 0.8,
               }}
-            />
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                {/* Cloud main body */}
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "50%",
+                    height: "50%",
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    borderRadius: "50%",
+                    top: "30%",
+                    left: "25%",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "40%",
+                    height: "40%",
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    borderRadius: "50%",
+                    top: "20%",
+                    left: "10%",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "45%",
+                    height: "45%",
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    borderRadius: "50%",
+                    top: "25%",
+                    left: "45%",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "35%",
+                    height: "35%",
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    borderRadius: "50%",
+                    top: "15%",
+                    left: "60%",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </div>
+            </div>
           ))}
-        </div>
+        </>
       )}
     </div>
   );
