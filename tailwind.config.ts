@@ -1,8 +1,14 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -57,11 +63,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        'celebration-pink': 'hsl(var(--celebration-pink))',
-        'celebration-rose': 'hsl(var(--celebration-rose))',
-        'celebration-gold': 'hsl(var(--celebration-gold))',
-        'celebration-purple': 'hsl(var(--celebration-purple))',
-        'celebration-dark-red': 'hsl(var(--celebration-dark-red))',
+        "celebration-pink": "hsl(var(--celebration-pink))",
+        "celebration-rose": "hsl(var(--celebration-rose))",
+        "celebration-gold": "hsl(var(--celebration-gold))",
+        "celebration-purple": "hsl(var(--celebration-purple))",
+        "celebration-dark-red": "hsl(var(--celebration-dark-red))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -70,39 +76,27 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         "float-up": {
           "0%": {
             transform: "translateY(100vh) rotate(0deg)",
             opacity: "0",
           },
-          "10%": {
-            opacity: "1",
-          },
-          "90%": {
-            opacity: "1",
-          },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "1" },
           "100%": {
             transform: "translateY(-100vh) rotate(360deg)",
             opacity: "0",
           },
         },
         "pulse-glow": {
-          "0%, 100%": {
+          "0%,100%": {
             transform: "scale(1)",
             opacity: "1",
           },
@@ -116,9 +110,7 @@ export default {
             transform: "scale(0)",
             opacity: "0",
           },
-          "50%": {
-            transform: "scale(1.1)",
-          },
+          "50%": { transform: "scale(1.1)" },
           "100%": {
             transform: "scale(1)",
             opacity: "1",
@@ -129,24 +121,26 @@ export default {
             transform: "translate(-50%, -50%) scale(0) rotate(0deg)",
             opacity: "0",
           },
-          "50%": {
-            opacity: "1",
-          },
+          "50%": { opacity: "1" },
           "100%": {
             transform: "translate(-50%, -50%) scale(1.5) rotate(180deg)",
             opacity: "0",
           },
         },
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        pacifico: ["Pacifico", "cursive"],
+      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float-up": "float-up linear infinite",
+        "float-up": "float-up 8s linear infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "bounce-in": "bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "bounce-in": "bounce-in 0.6s cubic-bezier(0.68,-0.55,0.265,1.55)",
         "sparkle-fade": "sparkle-fade 1s ease-out forwards",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 } satisfies Config;

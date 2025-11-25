@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 
 const StarsAndMoons = () => {
-  const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: number; delay: number }>>([]);
-  const [moons, setMoons] = useState<Array<{ id: number; left: string; top: string; delay: number }>>([]);
+  const [stars, setStars] = useState<
+    Array<{
+      id: number;
+      left: string;
+      top: string;
+      size: number;
+      delay: number;
+    }>
+  >([]);
+  const [moons, setMoons] = useState<
+    Array<{ id: number; left: string; top: string; delay: number }>
+  >([]);
 
   useEffect(() => {
     // Generate random stars
@@ -15,12 +25,14 @@ const StarsAndMoons = () => {
     }));
 
     // Generate one bright moon
-    const generatedMoons = [{
-      id: 0,
-      left: "85%",
-      top: "10%",
-      delay: 0,
-    }];
+    const generatedMoons = [
+      {
+        id: 0,
+        left: "85%",
+        top: "10%",
+        delay: 0,
+      },
+    ];
 
     setStars(generatedStars);
     setMoons(generatedMoons);
@@ -54,7 +66,8 @@ const StarsAndMoons = () => {
             top: moon.top,
             animation: "moon-glow 2s ease-in-out infinite",
             animationDelay: `${moon.delay}s`,
-            filter: "brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))",
+            filter:
+              "brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))",
           }}
         >
           🌕

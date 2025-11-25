@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "./ui/button";
-import  bday  from "../assets/bday.mp3"
 
 const BirthdayMusic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -56,7 +55,7 @@ const BirthdayMusic = () => {
       <audio
         ref={audioRef}
         loop
-        src={bday}
+        src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3"
       />
     </div>
   );
