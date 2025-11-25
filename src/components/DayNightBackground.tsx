@@ -5,19 +5,51 @@ const IRELAND_TIMEZONE = "Europe/Dublin";
 
 const DayNightBackground = () => {
   const [isNight, setIsNight] = useState(true);
-  const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: number; delay: number }>>([]);
-  const [clouds, setClouds] = useState<Array<{ id: number; top: string; size: number; duration: number; delay: number }>>([]);
-  const [birds, setBirds] = useState<Array<{ id: number; top: string; duration: number; delay: number; size: number }>>([]);
-  const [butterflies, setButterflies] = useState<Array<{ id: number; top: string; duration: number; delay: number; color: { primary: string; secondary: string; accent: string } }>>([]);
+  const [stars, setStars] = useState<
+    Array<{
+      id: number;
+      left: string;
+      top: string;
+      size: number;
+      delay: number;
+    }>
+  >([]);
+  const [clouds, setClouds] = useState<
+    Array<{
+      id: number;
+      top: string;
+      size: number;
+      duration: number;
+      delay: number;
+    }>
+  >([]);
+  const [birds, setBirds] = useState<
+    Array<{
+      id: number;
+      top: string;
+      duration: number;
+      delay: number;
+      size: number;
+    }>
+  >([]);
+  const [butterflies, setButterflies] = useState<
+    Array<{
+      id: number;
+      top: string;
+      duration: number;
+      delay: number;
+      color: { primary: string; secondary: string; accent: string };
+    }>
+  >([]);
 
   useEffect(() => {
     // Check if it's night time in Ireland (6 PM - 6 AM)
     const checkTimeOfDay = () => {
       const nowInIreland = toZonedTime(new Date(), IRELAND_TIMEZONE);
       const hour = nowInIreland.getHours();
-      
+
       // Night is from 18:00 (6 PM) to 06:00 (6 AM)
-      const isNightTime = hour >= 18 || hour < 6;
+      const isNightTime = hour >= 17 || hour < 8;
       setIsNight(isNightTime);
     };
 
@@ -71,7 +103,8 @@ const DayNightBackground = () => {
       top: `${Math.random() * 60 + 15}%`,
       duration: Math.random() * 8 + 12,
       delay: Math.random() * 10,
-      color: butterflyColors[Math.floor(Math.random() * butterflyColors.length)],
+      color:
+        butterflyColors[Math.floor(Math.random() * butterflyColors.length)],
     }));
 
     setButterflies(generatedButterflies);
@@ -87,16 +120,18 @@ const DayNightBackground = () => {
           isNight ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          background: "linear-gradient(to bottom, #0a1128 0%, #1a2744 50%, #2d3e5f 100%)",
+          background:
+            "linear-gradient(to bottom, #0a1128 0%, #1a2744 50%, #2d3e5f 100%)",
         }}
       />
-      
+
       <div
         className={`absolute inset-0 transition-opacity duration-1000 ${
           !isNight ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          background: "linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 40%, #FFF8DC 100%)",
+          background:
+            "linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 40%, #FFF8DC 100%)",
         }}
       />
 
@@ -113,13 +148,198 @@ const DayNightBackground = () => {
                 top: star.top,
                 width: `${star.size}px`,
                 height: `${star.size}px`,
-                animation: `twinkle ${2 + Math.random() * 2}s ease-in-out infinite`,
+                animation: `twinkle ${
+                  2 + Math.random() * 2
+                }s ease-in-out infinite`,
                 animationDelay: `${star.delay}s`,
                 boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, 0.8)`,
               }}
             />
           ))}
+          {butterflies.map((butterfly) => (
+            <div
+              key={`butterfly-${butterfly.id}`}
+              className="absolute"
+              style={{
+                top: butterfly.top,
+                left: "-5%",
+                animation: `fly-butterfly ${butterfly.duration}s ease-in-out infinite`,
+                animationDelay: `${butterfly.delay}s`,
+              }}
+            >
+              <svg
+                width="50"
+                height="40"
+                viewBox="0 0 50 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))",
+                }}
+              >
+                {/* Left upper wing */}
+                <ellipse
+                  cx="15"
+                  cy="15"
+                  rx="12"
+                  ry="15"
+                  fill={butterfly.color.primary}
+                  style={{
+                    transformOrigin: "15px 15px",
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                <ellipse
+                  cx="15"
+                  cy="15"
+                  rx="8"
+                  ry="11"
+                  fill={butterfly.color.secondary}
+                  style={{
+                    transformOrigin: "15px 15px",
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                {/* Wing pattern spots - left */}
+                <circle
+                  cx="13"
+                  cy="12"
+                  r="2.5"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+                <circle
+                  cx="18"
+                  cy="17"
+                  r="2"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
 
+                {/* Right upper wing */}
+                <ellipse
+                  cx="35"
+                  cy="15"
+                  rx="12"
+                  ry="15"
+                  fill={butterfly.color.primary}
+                  style={{
+                    transformOrigin: "35px 15px",
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                <ellipse
+                  cx="35"
+                  cy="15"
+                  rx="8"
+                  ry="11"
+                  fill={butterfly.color.secondary}
+                  style={{
+                    transformOrigin: "35px 15px",
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                {/* Wing pattern spots - right */}
+                <circle
+                  cx="37"
+                  cy="12"
+                  r="2.5"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+                <circle
+                  cx="32"
+                  cy="17"
+                  r="2"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+
+                {/* Left lower wing */}
+                <ellipse
+                  cx="18"
+                  cy="28"
+                  rx="8"
+                  ry="10"
+                  fill={butterfly.color.primary}
+                  style={{
+                    transformOrigin: "18px 28px",
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                <ellipse
+                  cx="18"
+                  cy="28"
+                  rx="5"
+                  ry="7"
+                  fill={butterfly.color.secondary}
+                  style={{
+                    transformOrigin: "18px 28px",
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+
+                {/* Right lower wing */}
+                <ellipse
+                  cx="32"
+                  cy="28"
+                  rx="8"
+                  ry="10"
+                  fill={butterfly.color.primary}
+                  style={{
+                    transformOrigin: "32px 28px",
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+                <ellipse
+                  cx="32"
+                  cy="28"
+                  rx="5"
+                  ry="7"
+                  fill={butterfly.color.secondary}
+                  style={{
+                    transformOrigin: "32px 28px",
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
+                  }}
+                />
+
+                {/* Body */}
+                <ellipse cx="25" cy="20" rx="2.5" ry="12" fill="#2C1810" />
+
+                {/* Antennae */}
+                <path
+                  d="M 25 10 Q 23 5, 22 3"
+                  stroke="#2C1810"
+                  strokeWidth="1"
+                  fill="none"
+                />
+                <circle cx="22" cy="3" r="1" fill="#2C1810" />
+                <path
+                  d="M 25 10 Q 27 5, 28 3"
+                  stroke="#2C1810"
+                  strokeWidth="1"
+                  fill="none"
+                />
+                <circle cx="28" cy="3" r="1" fill="#2C1810" />
+              </svg>
+            </div>
+          ))}
           {/* Realistic Moon */}
           <div
             className="absolute"
@@ -129,14 +349,14 @@ const DayNightBackground = () => {
               width: "120px",
               height: "120px",
               borderRadius: "50%",
-              background: "radial-gradient(circle at 35% 35%, #ffffff 0%, #f0f0f0 30%, #d0d0d0 60%, #a0a0a0 100%)",
+              background:
+                "radial-gradient(circle at 35% 35%, #ffffff 0%, #f0f0f0 30%, #d0d0d0 60%, #a0a0a0 100%)",
               boxShadow: `
                 0 0 40px rgba(255, 255, 255, 0.9),
                 0 0 80px rgba(255, 255, 255, 0.6),
                 inset -10px -10px 20px rgba(0, 0, 0, 0.2),
                 inset 5px 5px 15px rgba(255, 255, 255, 0.3)
               `,
-              animation: "moon-glow 3s ease-in-out infinite",
             }}
           >
             {/* Moon craters */}
@@ -145,8 +365,8 @@ const DayNightBackground = () => {
                 position: "absolute",
                 top: "20%",
                 left: "30%",
-                width: "15px",
-                height: "15px",
+                width: "2px",
+                height: "2px",
                 borderRadius: "50%",
                 background: "rgba(0, 0, 0, 0.1)",
                 boxShadow: "inset 2px 2px 4px rgba(0, 0, 0, 0.2)",
@@ -157,8 +377,8 @@ const DayNightBackground = () => {
                 position: "absolute",
                 top: "50%",
                 left: "60%",
-                width: "20px",
-                height: "20px",
+                width: "3px",
+                height: "3px",
                 borderRadius: "50%",
                 background: "rgba(0, 0, 0, 0.08)",
                 boxShadow: "inset 2px 2px 5px rgba(0, 0, 0, 0.2)",
@@ -169,8 +389,8 @@ const DayNightBackground = () => {
                 position: "absolute",
                 top: "65%",
                 left: "25%",
-                width: "12px",
-                height: "12px",
+                width: "2px",
+                height: "2px",
                 borderRadius: "50%",
                 background: "rgba(0, 0, 0, 0.08)",
                 boxShadow: "inset 1px 1px 3px rgba(0, 0, 0, 0.2)",
@@ -192,7 +412,8 @@ const DayNightBackground = () => {
               width: "140px",
               height: "140px",
               borderRadius: "50%",
-              background: "radial-gradient(circle at 40% 40%, #fff9e6 0%, #ffeb3b 40%, #ffc107 70%, #ff9800 100%)",
+              background:
+                "radial-gradient(circle at 40% 40%, #fff9e6 0%, #ffeb3b 40%, #ffc107 70%, #ff9800 100%)",
               boxShadow: `
                 0 0 60px rgba(255, 235, 59, 0.8),
                 0 0 100px rgba(255, 235, 59, 0.5),
@@ -211,7 +432,8 @@ const DayNightBackground = () => {
                   left: "50%",
                   width: "80px",
                   height: "3px",
-                  background: "linear-gradient(to right, rgba(255, 235, 59, 0.8), transparent)",
+                  background:
+                    "linear-gradient(to right, rgba(255, 235, 59, 0.8), transparent)",
                   transformOrigin: "left center",
                   transform: `rotate(${i * 30}deg) translateY(-50%)`,
                   opacity: 0.6,
@@ -326,7 +548,9 @@ const DayNightBackground = () => {
                   fill={butterfly.color.primary}
                   style={{
                     transformOrigin: "15px 15px",
-                    animation: `flutter-left ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 <ellipse
@@ -337,13 +561,27 @@ const DayNightBackground = () => {
                   fill={butterfly.color.secondary}
                   style={{
                     transformOrigin: "15px 15px",
-                    animation: `flutter-left ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 {/* Wing pattern spots - left */}
-                <circle cx="13" cy="12" r="2.5" fill={butterfly.color.accent} opacity="0.8" />
-                <circle cx="18" cy="17" r="2" fill={butterfly.color.accent} opacity="0.8" />
-                
+                <circle
+                  cx="13"
+                  cy="12"
+                  r="2.5"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+                <circle
+                  cx="18"
+                  cy="17"
+                  r="2"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+
                 {/* Right upper wing */}
                 <ellipse
                   cx="35"
@@ -353,7 +591,9 @@ const DayNightBackground = () => {
                   fill={butterfly.color.primary}
                   style={{
                     transformOrigin: "35px 15px",
-                    animation: `flutter-right ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 <ellipse
@@ -364,13 +604,27 @@ const DayNightBackground = () => {
                   fill={butterfly.color.secondary}
                   style={{
                     transformOrigin: "35px 15px",
-                    animation: `flutter-right ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 {/* Wing pattern spots - right */}
-                <circle cx="37" cy="12" r="2.5" fill={butterfly.color.accent} opacity="0.8" />
-                <circle cx="32" cy="17" r="2" fill={butterfly.color.accent} opacity="0.8" />
-                
+                <circle
+                  cx="37"
+                  cy="12"
+                  r="2.5"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+                <circle
+                  cx="32"
+                  cy="17"
+                  r="2"
+                  fill={butterfly.color.accent}
+                  opacity="0.8"
+                />
+
                 {/* Left lower wing */}
                 <ellipse
                   cx="18"
@@ -380,7 +634,9 @@ const DayNightBackground = () => {
                   fill={butterfly.color.primary}
                   style={{
                     transformOrigin: "18px 28px",
-                    animation: `flutter-left ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 <ellipse
@@ -391,10 +647,12 @@ const DayNightBackground = () => {
                   fill={butterfly.color.secondary}
                   style={{
                     transformOrigin: "18px 28px",
-                    animation: `flutter-left ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-left ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
-                
+
                 {/* Right lower wing */}
                 <ellipse
                   cx="32"
@@ -404,7 +662,9 @@ const DayNightBackground = () => {
                   fill={butterfly.color.primary}
                   style={{
                     transformOrigin: "32px 28px",
-                    animation: `flutter-right ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
                 <ellipse
@@ -415,13 +675,15 @@ const DayNightBackground = () => {
                   fill={butterfly.color.secondary}
                   style={{
                     transformOrigin: "32px 28px",
-                    animation: `flutter-right ${0.15 + Math.random() * 0.1}s ease-in-out infinite`,
+                    animation: `flutter-right ${
+                      0.15 + Math.random() * 0.1
+                    }s ease-in-out infinite`,
                   }}
                 />
-                
+
                 {/* Body */}
                 <ellipse cx="25" cy="20" rx="2.5" ry="12" fill="#2C1810" />
-                
+
                 {/* Antennae */}
                 <path
                   d="M 25 10 Q 23 5, 22 3"
@@ -437,54 +699,6 @@ const DayNightBackground = () => {
                   fill="none"
                 />
                 <circle cx="28" cy="3" r="1" fill="#2C1810" />
-              </svg>
-            </div>
-          ))}
-
-          {/* Flying Birds */}
-          {birds.map((bird) => (
-            <div
-              key={`bird-${bird.id}`}
-              className="absolute"
-              style={{
-                top: bird.top,
-                left: "-10%",
-                animation: `fly-bird ${bird.duration}s linear infinite`,
-                animationDelay: `${bird.delay}s`,
-                opacity: 0.6,
-                transform: `scale(${bird.size})`,
-              }}
-            >
-              {/* Bird silhouette using CSS */}
-              <svg
-                width="40"
-                height="20"
-                viewBox="0 0 40 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{
-                  filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))",
-                }}
-              >
-                {/* Left wing */}
-                <path
-                  d="M5 10 Q0 5, 5 2 L10 10 Z"
-                  fill="rgba(60, 60, 60, 0.8)"
-                  style={{
-                    animation: `flap-wing ${0.3 + Math.random() * 0.2}s ease-in-out infinite`,
-                  }}
-                />
-                {/* Body */}
-                <ellipse cx="20" cy="10" rx="3" ry="4" fill="rgba(60, 60, 60, 0.9)" />
-                {/* Right wing */}
-                <path
-                  d="M35 10 Q40 5, 35 2 L30 10 Z"
-                  fill="rgba(60, 60, 60, 0.8)"
-                  style={{
-                    animation: `flap-wing ${0.3 + Math.random() * 0.2}s ease-in-out infinite`,
-                    animationDelay: "0.15s",
-                  }}
-                />
               </svg>
             </div>
           ))}
