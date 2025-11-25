@@ -9,7 +9,7 @@ import ConfettiExplosion from "@/components/ConfettiExplosion";
 import Fireworks from "@/components/Fireworks";
 import CursorSparkles from "@/components/CursorSparkles";
 import CountdownTimer from "@/components/CountdownTimer";
-import StarsAndMoons from "@/components/StarsAndMoons";
+import DayNightBackground from "@/components/DayNightBackground";
 import { Sparkles } from "lucide-react";
 
 const IRELAND_TIMEZONE = "Europe/Dublin";
@@ -52,7 +52,7 @@ const Index = () => {
   if (!isBirthdayTime) {
     return (
       <div className={`transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-        <StarsAndMoons />
+        <DayNightBackground />
         <CountdownTimer />
       </div>
     );
