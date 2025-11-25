@@ -7,6 +7,7 @@ const DayNightBackground = () => {
   const [isNight, setIsNight] = useState(true);
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; size: number; delay: number }>>([]);
   const [clouds, setClouds] = useState<Array<{ id: number; top: string; size: number; duration: number; delay: number }>>([]);
+  const [birds, setBirds] = useState<Array<{ id: number; top: string; duration: number; delay: number; size: number }>>([]);
 
   useEffect(() => {
     // Check if it's night time in Ireland (6 PM - 6 AM)
@@ -43,6 +44,17 @@ const DayNightBackground = () => {
     }));
 
     setClouds(generatedClouds);
+
+    // Generate birds for day mode
+    const generatedBirds = Array.from({ length: 4 }, (_, i) => ({
+      id: i,
+      top: `${Math.random() * 40 + 15}%`,
+      duration: Math.random() * 10 + 15,
+      delay: Math.random() * 8,
+      size: Math.random() * 0.3 + 0.8,
+    }));
+
+    setBirds(generatedBirds);
 
     return () => clearInterval(interval);
   }, []);
@@ -260,6 +272,54 @@ const DayNightBackground = () => {
                   }}
                 />
               </div>
+            </div>
+          ))}
+
+          {/* Flying Birds */}
+          {birds.map((bird) => (
+            <div
+              key={`bird-${bird.id}`}
+              className="absolute"
+              style={{
+                top: bird.top,
+                left: "-10%",
+                animation: `fly-bird ${bird.duration}s linear infinite`,
+                animationDelay: `${bird.delay}s`,
+                opacity: 0.6,
+                transform: `scale(${bird.size})`,
+              }}
+            >
+              {/* Bird silhouette using CSS */}
+              <svg
+                width="40"
+                height="20"
+                viewBox="0 0 40 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))",
+                }}
+              >
+                {/* Left wing */}
+                <path
+                  d="M5 10 Q0 5, 5 2 L10 10 Z"
+                  fill="rgba(60, 60, 60, 0.8)"
+                  style={{
+                    animation: `flap-wing ${0.3 + Math.random() * 0.2}s ease-in-out infinite`,
+                  }}
+                />
+                {/* Body */}
+                <ellipse cx="20" cy="10" rx="3" ry="4" fill="rgba(60, 60, 60, 0.9)" />
+                {/* Right wing */}
+                <path
+                  d="M35 10 Q40 5, 35 2 L30 10 Z"
+                  fill="rgba(60, 60, 60, 0.8)"
+                  style={{
+                    animation: `flap-wing ${0.3 + Math.random() * 0.2}s ease-in-out infinite`,
+                    animationDelay: "0.15s",
+                  }}
+                />
+              </svg>
             </div>
           ))}
         </>
