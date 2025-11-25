@@ -35,8 +35,8 @@ const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-celebration-rose/20 to-background flex items-center justify-center px-4">
-      <div className="text-center space-y-8 max-w-4xl w-full">
+    <div className="min-h-screen flex items-center justify-center px-4 relative z-10">
+      <div className="text-center space-y-8 max-w-4xl w-full font-poppins">
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
           <div className="bg-card/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-primary/20 shadow-lg hover:scale-105 transition-transform">
@@ -70,20 +70,20 @@ const CountdownTimer = () => {
 
         <div className="space-y-4">
           <div className="flex items-center justify-center gap-2">
-            <Sparkles className="w-5 h-5 text-celebration-gold animate-pulse" />
-            <p className="text-2xl sm:text-3xl text-celebration-gold font-bold">
+            <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-yellow-300 animate-pulse" />
+            <p className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-white drop-shadow-[0_2px_8px_rgba(255,215,0,0.8)]">
               Hi Ajitha,
             </p>
-            <Sparkles className="w-5 h-5 text-celebration-gold animate-pulse" style={{ animationDelay: '0.5s' }} />
+            <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-yellow-300 animate-pulse" style={{ animationDelay: '0.5s' }} />
           </div>
-          <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
+          <p className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             Advanced Happy Birthday Wishes
           </p>
           
-          <div className="flex items-center justify-center gap-2 text-lg sm:text-xl text-celebration-gold font-semibold">
-            <Sparkles className="w-5 h-5 text-celebration-gold" />
+          <div className="flex items-center justify-center gap-2 text-xl sm:text-2xl text-yellow-200 font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+            <Sparkles className="w-5 h-5 text-yellow-300" />
             <span>February 19, 2026</span>
-            <Sparkles className="w-5 h-5 text-celebration-gold" />
+            <Sparkles className="w-5 h-5 text-yellow-300" />
           </div>
         </div>
 
