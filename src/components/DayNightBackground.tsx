@@ -50,6 +50,15 @@ const DayNightBackground = () => {
       size: number;
     }>
   >([]);
+  const [bees, setBees] = useState<
+    Array<{
+      id: number;
+      startX: number;
+      endX: number;
+      duration: number;
+      delay: number;
+    }>
+  >([]);
 
   useEffect(() => {
     // Check if it's night time in Ireland (6 PM - 6 AM)
@@ -137,6 +146,17 @@ const DayNightBackground = () => {
     }));
 
     setFlowers(generatedFlowers);
+
+    // Generate bees for day mode
+    const generatedBees = Array.from({ length: 5 }, (_, i) => ({
+      id: i,
+      startX: Math.random() * 80 + 10,
+      endX: Math.random() * 80 + 10,
+      duration: Math.random() * 4 + 6,
+      delay: Math.random() * 5,
+    }));
+
+    setBees(generatedBees);
 
     return () => clearInterval(interval);
   }, []);
@@ -543,6 +563,90 @@ const DayNightBackground = () => {
                   }}
                 />
               </div>
+            </div>
+          ))}
+
+          {/* Bees */}
+          {bees.map((bee) => (
+            <div
+              key={`bee-${bee.id}`}
+              className="absolute"
+              style={{
+                bottom: "40px",
+                left: `${bee.startX}%`,
+                animation: `buzz-between-flowers ${bee.duration}s ease-in-out infinite`,
+                animationDelay: `${bee.delay}s`,
+                zIndex: 2,
+              }}
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.2))",
+                }}
+              >
+                {/* Wings - left */}
+                <ellipse
+                  cx="8"
+                  cy="10"
+                  rx="6"
+                  ry="8"
+                  fill="rgba(173, 216, 230, 0.6)"
+                  style={{
+                    transformOrigin: "8px 10px",
+                    animation: "flap-bee-wing 0.1s ease-in-out infinite",
+                  }}
+                />
+                {/* Wings - right */}
+                <ellipse
+                  cx="16"
+                  cy="10"
+                  rx="6"
+                  ry="8"
+                  fill="rgba(173, 216, 230, 0.6)"
+                  style={{
+                    transformOrigin: "16px 10px",
+                    animation: "flap-bee-wing 0.1s ease-in-out infinite",
+                    animationDelay: "0.05s",
+                  }}
+                />
+                {/* Body */}
+                <ellipse cx="12" cy="12" rx="4" ry="6" fill="#FFD700" />
+                {/* Stripes */}
+                <rect x="10" y="10" width="4" height="1.5" fill="#000" rx="0.5" />
+                <rect x="10" y="13" width="4" height="1.5" fill="#000" rx="0.5" />
+                {/* Head */}
+                <circle cx="12" cy="7" r="2.5" fill="#000" />
+                {/* Eyes */}
+                <circle cx="11" cy="6.5" r="0.5" fill="#FFF" />
+                <circle cx="13" cy="6.5" r="0.5" fill="#FFF" />
+                {/* Antennae */}
+                <path
+                  d="M 11 5 Q 10 3, 9.5 2"
+                  stroke="#000"
+                  strokeWidth="0.5"
+                  fill="none"
+                />
+                <circle cx="9.5" cy="2" r="0.5" fill="#000" />
+                <path
+                  d="M 13 5 Q 14 3, 14.5 2"
+                  stroke="#000"
+                  strokeWidth="0.5"
+                  fill="none"
+                />
+                <circle cx="14.5" cy="2" r="0.5" fill="#000" />
+                {/* Stinger */}
+                <path
+                  d="M 12 17 L 12 19"
+                  stroke="#000"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
           ))}
 
