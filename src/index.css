@@ -310,6 +310,15 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes land-on-flower {
+  0%, 100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
