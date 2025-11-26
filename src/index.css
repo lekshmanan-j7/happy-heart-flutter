@@ -343,6 +343,18 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes sway-grass {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
