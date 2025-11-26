@@ -59,6 +59,15 @@ const DayNightBackground = () => {
       delay: number;
     }>
   >([]);
+  const [grassBlades, setGrassBlades] = useState<
+    Array<{
+      id: number;
+      left: string;
+      height: number;
+      delay: number;
+      duration: number;
+    }>
+  >([]);
 
   useEffect(() => {
     // Check if it's night time in Ireland (6 PM - 6 AM)
@@ -157,6 +166,17 @@ const DayNightBackground = () => {
     }));
 
     setBees(generatedBees);
+
+    // Generate grass blades for day mode
+    const generatedGrass = Array.from({ length: 80 }, (_, i) => ({
+      id: i,
+      left: `${(i / 80) * 100}%`,
+      height: Math.random() * 30 + 40,
+      delay: Math.random() * 2,
+      duration: Math.random() * 2 + 2,
+    }));
+
+    setGrassBlades(generatedGrass);
 
     return () => clearInterval(interval);
   }, []);
@@ -648,6 +668,25 @@ const DayNightBackground = () => {
                 />
               </svg>
             </div>
+          ))}
+
+          {/* Grass blades at bottom */}
+          {grassBlades.map((grass) => (
+            <div
+              key={`grass-${grass.id}`}
+              className="absolute"
+              style={{
+                bottom: "0px",
+                left: grass.left,
+                width: "2px",
+                height: `${grass.height}px`,
+                background: "linear-gradient(to top, #4CAF50, #66BB6A)",
+                transformOrigin: "bottom center",
+                animation: `sway-grass ${grass.duration}s ease-in-out infinite`,
+                animationDelay: `${grass.delay}s`,
+                borderRadius: "2px 2px 0 0",
+              }}
+            />
           ))}
 
           {/* Flowers at bottom */}
