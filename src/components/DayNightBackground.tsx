@@ -39,6 +39,15 @@ const DayNightBackground = () => {
       duration: number;
       delay: number;
       color: { primary: string; secondary: string; accent: string };
+      landingPosition?: number;
+    }>
+  >([]);
+  const [flowers, setFlowers] = useState<
+    Array<{
+      id: number;
+      left: string;
+      color: { petal: string; center: string };
+      size: number;
     }>
   >([]);
 
@@ -105,9 +114,29 @@ const DayNightBackground = () => {
       delay: Math.random() * 10,
       color:
         butterflyColors[Math.floor(Math.random() * butterflyColors.length)],
+      landingPosition: i % 2 === 0 ? Math.random() * 80 + 10 : undefined,
     }));
 
     setButterflies(generatedButterflies);
+
+    // Generate flowers for day mode
+    const flowerColors = [
+      { petal: "#FF69B4", center: "#FFD700" }, // Pink with yellow
+      { petal: "#FF1493", center: "#FFA500" }, // Deep pink with orange
+      { petal: "#9370DB", center: "#FFD700" }, // Purple with yellow
+      { petal: "#FF6347", center: "#FFD700" }, // Tomato red with yellow
+      { petal: "#87CEEB", center: "#FFA500" }, // Sky blue with orange
+      { petal: "#FF69B4", center: "#FF8C00" }, // Hot pink with dark orange
+    ];
+
+    const generatedFlowers = Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 90 + 5}%`,
+      color: flowerColors[Math.floor(Math.random() * flowerColors.length)],
+      size: Math.random() * 15 + 25,
+    }));
+
+    setFlowers(generatedFlowers);
 
     return () => clearInterval(interval);
   }, []);
@@ -517,15 +546,92 @@ const DayNightBackground = () => {
             </div>
           ))}
 
+          {/* Flowers at bottom */}
+          {flowers.map((flower) => (
+            <div
+              key={`flower-${flower.id}`}
+              className="absolute"
+              style={{
+                bottom: "0px",
+                left: flower.left,
+                zIndex: 1,
+              }}
+            >
+              <svg
+                width={flower.size}
+                height={flower.size * 1.5}
+                viewBox="0 0 40 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Stem */}
+                <line
+                  x1="20"
+                  y1="30"
+                  x2="20"
+                  y2="60"
+                  stroke="#4CAF50"
+                  strokeWidth="2"
+                />
+                {/* Leaves */}
+                <ellipse
+                  cx="15"
+                  cy="45"
+                  rx="5"
+                  ry="8"
+                  fill="#66BB6A"
+                  transform="rotate(-30 15 45)"
+                />
+                <ellipse
+                  cx="25"
+                  cy="40"
+                  rx="5"
+                  ry="8"
+                  fill="#66BB6A"
+                  transform="rotate(30 25 40)"
+                />
+                {/* Flower petals */}
+                {[0, 72, 144, 216, 288].map((angle, i) => (
+                  <ellipse
+                    key={i}
+                    cx="20"
+                    cy="15"
+                    rx="8"
+                    ry="12"
+                    fill={flower.color.petal}
+                    transform={`rotate(${angle} 20 15)`}
+                    style={{
+                      transformOrigin: "20px 15px",
+                    }}
+                  />
+                ))}
+                {/* Flower center */}
+                <circle cx="20" cy="15" r="5" fill={flower.color.center} />
+                <circle
+                  cx="20"
+                  cy="15"
+                  r="3"
+                  fill={flower.color.center}
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+          ))}
+
           {/* Butterflies */}
           {butterflies.map((butterfly) => (
             <div
               key={`butterfly-${butterfly.id}`}
               className="absolute"
               style={{
-                top: butterfly.top,
-                left: "-5%",
-                animation: `fly-butterfly ${butterfly.duration}s ease-in-out infinite`,
+                top: butterfly.landingPosition ? "auto" : butterfly.top,
+                bottom: butterfly.landingPosition ? "20px" : "auto",
+                left: butterfly.landingPosition
+                  ? `${butterfly.landingPosition}%`
+                  : "-5%",
+                animation: butterfly.landingPosition
+                  ? `land-on-flower ${butterfly.duration}s ease-in-out infinite`
+                  : `fly-butterfly ${butterfly.duration}s ease-in-out infinite`,
                 animationDelay: `${butterfly.delay}s`,
               }}
             >
