@@ -319,6 +319,30 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes buzz-between-flowers {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(20vw) translateY(-8px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(40vw) translateY(5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(20vw) translateY(-5px) rotate(4deg);
+  }
+}
+
+@keyframes flap-bee-wing {
+  0%, 100% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(70deg);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
